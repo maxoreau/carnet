@@ -72,7 +72,7 @@
 						<legend>Delete</legend>
 						<form action="#" th:action="@{/carnet/del}" method="get" id="formDelete">
 							<select id="listeContacts" name="contactId">
-								<option  selected="true" disabled="disabled"> -- select a contact -- </option>
+								<option value="default" selected="true" disabled="disabled"> -- select a contact -- </option>
 								<option th:each="contact : ${contacts}"
 									th:value="${contact.contactId}"
 									th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></option>

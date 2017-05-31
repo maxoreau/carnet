@@ -4,12 +4,12 @@ package com.maxoreau.springboot.carnet.controllers;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,13 +19,12 @@ import com.maxoreau.springboot.carnet.models.Contact;
 @RestController
 public class CarnetRestController {
 	
-
 	@Autowired
 	daoGenerique<Contact> dao;
 	
-	@GetMapping("/contact/id{id}")
+	@GetMapping("/contact/id-{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Contact searchById(@PathParam("id") Integer id) {
+	public Contact searchById(@PathVariable("id") Integer id) { 
 		return dao.readById(id);
 	}
 	
@@ -36,5 +35,4 @@ public class CarnetRestController {
 		dao.update(contact);
 		return dao.getAll();
 	}
-
 }
