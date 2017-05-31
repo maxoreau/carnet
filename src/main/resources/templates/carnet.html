@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/style.css" th:href="@{/style.css}" />
+</head>
+<body>
+	<div class="page">
+
+		<div id="head" class="header">
+			<h2>Contacts administration</h2>
+		</div>
+
+		<div id="wrap" class="wraper">
+
+			<div id="fonctionnalites" class="fonctions">
+
+				<div id="search" class="fonction01">
+
+					<fieldset>
+						<legend>Search</legend>
+						<form action="#" th:action="@{/carnet}" method="get"
+							id="formSearch">
+							<input type="search" class="formItem" id="searchBox"
+								name="search" />
+							<button type="submit" value="submit" form="formSearch">Search</button>
+							<button type="submit" value="submit" form="formClear">Clear</button>
+						</form>
+						<form action="#" th:action="@{/open}" method="get"
+							id="formClear"></form>
+
+
+					</fieldset>
+
+				</div>
+
+				<div id="contactCreation" class="fonction02">
+					<fieldset>
+						<legend>Create contact</legend>
+						<form action="#" th:action="@{/carnet}" th:object="${contact}"
+							method="post" id="formCreate">
+							<table>
+								<tr>
+									<td><label class="formItem" for="inputPrenom">first
+											name</label></td>
+									<td><input type="text" class="formItem" id="inputPrenom"
+										th:field="*{prenom}" /></td>
+								</tr>
+								<tr>
+									<td><label class="formItem" for="inputNom">last
+											name</label></td>
+									<td><input type="text" class="formItem" id="inputNom"
+										th:field="*{nom}" /></td>
+								</tr>
+								<tr>
+									<td><label class="formItem" for="inputNumero">phone
+											number</label></td>
+									<td><input type="text" class="formItem" id="inputNumero"
+										th:field="*{numero}" /></td>
+								</tr>
+							</table>
+							<button type="submit" value="submit" form="formCreate">Create</button>
+							<button type="reset" value="reset">Clear</button>
+						</form>
+					</fieldset>
+				</div>
+
+				<div id="alterContact" class="fonction03">
+
+					<fieldset th:if="${contacts}">
+						<legend>Delete</legend>
+						<form action="#" th:action="@{/carnet/del}" method="get" id="formDelete">
+							<select id="listeContacts" name="contactId">
+								<option  selected="true" disabled="disabled"> -- select a contact -- </option>
+								<option th:each="contact : ${contacts}"
+									th:value="${contact.contactId}"
+									th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></option>
+							</select>
+							<button type="submit" value="submit" form="formDelete">Delete</button>
+							<button type="button" id="btnModifyContact">Modify</button>
+							<button type="button" id="btnClearAlterFields">Clear</button>
+						</form>
+						<table class="tableModifyContact">
+								<tr>
+									<td><label class="formItem" for="inputPrenom">modify first
+											name</label></td>
+									<td><input type="text" class="formItem" id="alterPrenom" /></td>
+								</tr>
+								<tr>
+									<td><label class="formItem" for="inputNom">modify last
+											name</label></td>
+									<td><input type="text" class="formItem" id="alterNom" /></td>
+								</tr>
+								<tr>
+									<td><label class="formItem" for="inputNumero">modify phone
+											number</label></td>
+									<td><input type="text" class="formItem" id="alterNumero" /></td>
+								</tr>
+							</table>
+					</fieldset>
+				</div>
+
+			</div>
+			<div id="affichageContacts" class="affichage">
+				<fieldset th:if="${contacts}">
+					<legend>Display</legend>
+					<ul th:each="contact : ${contacts}">
+						<li th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></li>
+					</ul>
+				</fieldset>
+			</div>
+		</div>
+
+
+		<div id="foot" class="footer"></div>
+
+        <script src="../static/script/jquery-3.2.1.js" th:src="@{/script/jquery-3.2.1.js}"></script>
+        <script scr="../static/script/appjquery.js" th:src="@{/script/appjquery.js}"></script>
+	</div>
+</body>
+</html>

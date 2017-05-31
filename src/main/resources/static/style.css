@@ -1,0 +1,65 @@
+body {
+    background-color: darkgray;
+    width: 900px;
+    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 98vh;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #808080;
+}
+
+.header p {
+    align-self: flex-end;
+}
+
+table {
+    border-collapse: collapse;
+    /* Les bordures du tableau seront coll�es */
+}
+
+.formItem {
+    size: 10;
+}
+
+.wraper {
+    margin-bottom: 2px;
+    margin-top: 2px;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+    padding-bottom: 2px;
+}
+
+.wraper .fonctions {
+    margin-right: 1px;
+    flex: 4;
+    background-color: #808080;
+}
+
+.wraper .fonctions .listeContacts {
+    width: 150px;
+}
+
+.wraper .affichage {
+    margin-left: 1px;
+    padding: 0;
+    flex: 2;
+    background-color: #808080;
+}
