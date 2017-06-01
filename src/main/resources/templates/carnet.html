@@ -105,8 +105,8 @@
 			<div id="affichageContacts" class="affichage">
 				<fieldset th:if="${contacts}">
 					<legend>Display</legend>
-					<ul th:each="contact : ${contacts}">
-						<li th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></li>
+					<ul >
+						<li th:each="contact : ${contacts}" th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></li>
 					</ul>
 				</fieldset>
 			</div>

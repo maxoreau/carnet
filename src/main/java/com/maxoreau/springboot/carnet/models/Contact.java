@@ -1,5 +1,8 @@
 package com.maxoreau.springboot.carnet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Contact {
 	private int contactId;
 	private String prenom;
