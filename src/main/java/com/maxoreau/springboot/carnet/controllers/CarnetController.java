@@ -36,8 +36,8 @@ public class CarnetController {
 		return mav;		
 	}
 	
-	@GetMapping("/carnet")
-	public ModelAndView showContacts(@RequestParam(value="search", required=false) String search){
+	@GetMapping("/search")
+	public ModelAndView getByString(@RequestParam(value="search", required=false) String search){
 		if (search == null) {
 			search = "";
 		}
@@ -47,11 +47,11 @@ public class CarnetController {
 	}
 	
 	@GetMapping("/open")
-	public ModelAndView openCarnet(Model model){
+	public ModelAndView openEmptyCarnet(Model model){
 		mavConstruct();
 		return mav;
 	}
-	
+	/*
 	@GetMapping("/carnet/del")
 	public ModelAndView delContact(@RequestParam(value="contactId", required=false) Integer id){
 		mavConstruct();
@@ -64,9 +64,9 @@ public class CarnetController {
 			return mav;
 		}
 	}
-	
+	*/
 	@PostMapping("/carnet")
-	public ModelAndView helloCarnet(@ModelAttribute Contact contact){
+	public ModelAndView addContact(@ModelAttribute Contact contact){
 		dao.create(contact);
 		mavConstruct();
 		mav.addObject("contacts", dao.getAll());

@@ -3,7 +3,8 @@
 <head>
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" media="all" href="../static/style.css" th:href="@{/style.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../static/style.css" th:href="@{/style.css}" />
 </head>
 <body>
 	<div class="page">
@@ -20,15 +21,15 @@
 
 					<fieldset>
 						<legend>Search</legend>
-						<form action="#" th:action="@{/carnet}" method="get"
+						<form action="#" th:action="@{/search}" method="get"
 							id="formSearch">
 							<input type="search" class="formItem" id="searchBox"
 								name="search" />
 							<button type="submit" value="submit" form="formSearch">Search</button>
 							<button type="submit" value="submit" form="formClear">Clear</button>
+							<button type="button" id="getAll">get All</button>
 						</form>
-						<form action="#" th:action="@{/open}" method="get"
-							id="formClear"></form>
+						<form action="#" th:action="@{/open}" method="get" id="formClear"></form>
 
 
 					</fieldset>
@@ -69,45 +70,60 @@
 				<div id="alterContact" class="fonction03">
 
 					<fieldset th:if="${contacts}">
-						<legend>Delete</legend>
-						<form action="#" th:action="@{/carnet/del}" method="get" id="formDelete">
+						<legend>Modify</legend>
+						<form>
 							<select id="listeContacts" name="contactId">
-								<option value="default" selected="true" disabled="disabled"> -- select a contact -- </option>
+								<option value="default" selected="true" disabled="disabled">
+									-- select a contact --</option>
 								<option th:each="contact : ${contacts}"
 									th:value="${contact.contactId}"
 									th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></option>
 							</select>
-							<button type="submit" value="submit" form="formDelete">Delete</button>
 							<button type="button" id="btnModifyContact">Modify</button>
 							<button type="button" id="btnClearAlterFields">Clear</button>
 						</form>
 						<table class="tableModifyContact">
-								<tr>
-									<td><label class="formItem" for="inputPrenom">modify first
-											name</label></td>
-									<td><input type="text" class="formItem" id="alterPrenom" /></td>
-								</tr>
-								<tr>
-									<td><label class="formItem" for="inputNom">modify last
-											name</label></td>
-									<td><input type="text" class="formItem" id="alterNom" /></td>
-								</tr>
-								<tr>
-									<td><label class="formItem" for="inputNumero">modify phone
-											number</label></td>
-									<td><input type="text" class="formItem" id="alterNumero" /></td>
-								</tr>
-							</table>
+							<tr>
+								<td><label class="formItem" for="inputPrenom">modify
+										first name</label></td>
+								<td><input type="text" class="formItem" id="alterPrenom" /></td>
+							</tr>
+							<tr>
+								<td><label class="formItem" for="inputNom">modify
+										last name</label></td>
+								<td><input type="text" class="formItem" id="alterNom" /></td>
+							</tr>
+							<tr>
+								<td><label class="formItem" for="inputNumero">modify
+										phone number</label></td>
+								<td><input type="text" class="formItem" id="alterNumero" /></td>
+							</tr>
+						</table>
 					</fieldset>
 				</div>
 
 			</div>
 			<div id="affichageContacts" class="affichage">
 				<fieldset th:if="${contacts}">
-					<legend>Display</legend>
-					<ul >
-						<li th:each="contact : ${contacts}" th:text="${contact.prenom} + ' ' + ${contact.nom} + ' [' + ${contact.numero} + ']'"></li>
-					</ul>
+					<legend>Delete</legend>
+					<table id="checkboxes">
+						<tr>
+							<th></th>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Phone number</th>
+						</tr>
+						<tr th:each="contact : ${contacts}">
+							<td><input type="checkbox" class="checkboxDelete" th:value="${contact.contactId}"/></td>
+							<td th:text="${contact.prenom}"></td>
+							<td th:text="${contact.nom}"></td>
+							<td th:text="${contact.numero}"></td>
+						</tr>
+					</table>
+					<button type="button" id="SelectAll">Select All</button>
+					<button type="button" id="UnselectAll">Clear</button>
+					<button type="button" id="multiDelete">Delete</button>
+					
 				</fieldset>
 			</div>
 		</div>
@@ -115,8 +131,10 @@
 
 		<div id="foot" class="footer"></div>
 
-        <script src="../static/script/jquery-3.2.1.js" th:src="@{/script/jquery-3.2.1.js}"></script>
-        <script scr="../static/script/appjquery.js" th:src="@{/script/appjquery.js}"></script>
+		<script src="../static/script/jquery-3.2.1.js"
+			th:src="@{/script/jquery-3.2.1.js}"></script>
+		<script scr="../static/script/appjquery.js"
+			th:src="@{/script/appjquery.js}"></script>
 	</div>
 </body>
 </html>
