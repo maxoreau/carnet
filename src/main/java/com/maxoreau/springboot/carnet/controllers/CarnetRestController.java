@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maxoreau.springboot.carnet.dao.daoGenerique;
@@ -38,18 +39,16 @@ public class CarnetRestController {
 	}
 	
 	@PutMapping("/contact")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateContact(Contact contact) {
+	public void updateContact(@RequestBody Contact contact) {
 		System.out.println("Rest updateContact " + contact);
 		dao.update(contact);
 	}
 	
 	@DeleteMapping("/contact")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteContacts(List<Contact> list) {
+	public void deleteContacts(List<Integer> list) {
 		System.out.println("Rest delete Contacts " + list);
-		for (Contact c : list) {
-			dao.delete(c.getContactId());
-		}
+		list.forEach((contactId) -> {
+			dao.delete(contactId);
+		});
 	}
 }

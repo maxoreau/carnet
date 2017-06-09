@@ -27,14 +27,6 @@ $('#btnClearAlterFields').on('click', function() {
     $('#listeContacts').val('default').change();
 })
 
-$('#multiDelete').on('click', function() {
-    var allVals = [];
-    $('#checkboxes :checked').each(function() {
-        allVals.push($(this).val());
-    });
-    console.log(allVals);
-})
-
 $('#SelectAll').on('click', function() {
     $('.checkboxDelete').each(function() {
         $(this).prop('checked', true);
@@ -47,11 +39,28 @@ $('#UnselectAll').on('click', function() {
     });
 })
 
+$('#multiDelete').on('click', function() {
+    var allVals = [];
+    $('#checkboxes :checked').each(function() {
+        allVals.push($(this).val());
+    });
+    console.log(allVals);
+    $.ajax({ // appel à la fonction qui va envoyer le contact au serveur
+        url: ('http://localhost:8080/contact/'),
+        type: 'DELETE',
+        data: JSON.stringify(allVals),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        async: true,
+        success: function() {
+            console.log("OK Delete");
+        }
+    });
+})
+
 $('#getAll').on('click', function() {
     fetchAllContacts();
 })
-
-
 
 $('#btnModifyContact').on('click', function() {
     var updatedContact = new Contact($('#listeContacts').val(), $('#alterPrenom').val(), $('#alterNom').val(), $('#alterNumero').val());
