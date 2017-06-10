@@ -25,14 +25,12 @@ public class CarnetRestController {
 	daoGenerique<Contact> dao;
 	
 	@GetMapping("/contact/id-{id}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Contact searchById(@PathVariable("id") Integer id) { 
 		System.out.println("Rest searchById");
 		return dao.readById(id);
 	}
 	
 	@GetMapping("/contact")
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<Contact> getAllContacts() { 
 		System.out.println("Rest getAllContacts");
 		return dao.getAll();
@@ -45,7 +43,7 @@ public class CarnetRestController {
 	}
 	
 	@DeleteMapping("/contact")
-	public void deleteContacts(List<Integer> list) {
+	public void deleteContacts(@RequestBody List<Integer> list) {
 		System.out.println("Rest delete Contacts " + list);
 		list.forEach((contactId) -> {
 			dao.delete(contactId);
